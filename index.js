@@ -1,4 +1,5 @@
 var http = require('http');  
+var express = require('express');
 fs = require('fs');
 
 function serveStaticFile(res, path, contentType, responseCode){
@@ -26,8 +27,8 @@ http.createServer(function(req,res) {
             serveStaticFile(res, '/public/about.html', 'text/html');
             break;
             
-        case '/img/logo.jpg':
-            serveStaticFile(res, '/public/img/logo.jpg', 'text/html');
+        case '/img/logo.png':
+            serveStaticFile(res, '/public/img/logo.png', 'text/html');
             break;
             
         default:
