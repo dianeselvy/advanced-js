@@ -1,5 +1,4 @@
 var http = require('http');  
-var express = require('express');
 fs = require('fs');
 
 function serveStaticFile(res, path, contentType, responseCode){
