@@ -6,7 +6,11 @@ var albums = [
     {name:"Pablo Honey", songs:"12", year:"1993"}
 ];
 
-exports.getAlbums = function() {
-    var idx = Math.floor(Math.random() * albums.length);
-    return albums[idx];
+exports.getAllAlbums = function() {
+    return albums;
 };
+
+/*exports.getOneAlbum = function() {
+    
+    return
+}*/

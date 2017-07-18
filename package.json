@@ -2,5 +2,22 @@
   "dependencies": {
     "express": "^4.15.3",
     "express-handlebars": "^2.0.1"
-  }
+  },
+  "name": "advanced-js",
+  "version": "1.0.0",
+  "description": "An app about radiohead albums.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dianeselvy/advanced-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dianeselvy/advanced-js/issues"
+  },
+  "homepage": "https://github.com/dianeselvy/advanced-js#readme"
 }
