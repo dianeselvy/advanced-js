@@ -1,9 +1,17 @@
 'use strict'
 
+let radiohead = require("./lib/radiohead.js");
+const express = require("express");
+const app = express();
+
+app.set('port', process.env.PORT || 3000);
+app.use(express.static(__dirname + '/public'));
+app.use(require("body-parser").urlencoded({extended: true}));
+
 var http = require("http"),
 fs = require("fs"), 
 qs = require("querystring"); 
-let radiohead = require("./lib/radiohead.js");
+
 
 function serveStatic(res, path, contentType, responseCode){
     if(!responseCode) responseCode = 200;

@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "express": "^4.15.3",
-    "express-handlebars": "^2.0.1"
+    "express-handlebars": "^2.0.1",
+    "body-parser": "1.17.2"
   },
   "name": "advanced-js",
   "version": "1.0.0",
