@@ -1,9 +1,9 @@
 <html>
-<head>
-    <title>Node.js - About</title>
+    <head>
+    <title>Node.js - Details</title> 
 </head>
 <header>
-    <style type="text/css">
+<style type="text/css">
     
     navigation {
         width:1200px;
@@ -34,16 +34,25 @@
         width:50px;
     }
     
-    </style>
+</style>
     <navigation>
        <ul>
 		<li><img src="/img/logo.png" alt="logo"></li>
-        <li><a href="http://localhost:3000/">HOME</a></li>
-		<li><a href="http://localhost:3000/about">ABOUT</a></li>	
+        <li><a href="/public/home.html">HOME</a></li>
+		<li><a href="/public/about.html">ABOUT</a></li>	
 	   </ul>
-    </navigation>    
+    </navigation> 
 </header>
 <body>
-    <p>About.html</p>
+    
+{{#if result.deleted}}
+    <h2>"{{name}}" deleted</h2>
+    <p>Remaining total: {{result.total}}</p>
+
+{{else}}
+    <h2>"{{name}}" Not Found</h2>
+
+{{/if}}
+    
 </body>
 </html>

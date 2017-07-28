@@ -1,68 +1,55 @@
-'use strict'
+'use strict';
 
 let radiohead = require("./lib/radiohead.js");
 const express = require("express");
+const bodyParser = require('body-parser');
 const app = express();
 
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
 app.use(require("body-parser").urlencoded({extended: true}));
 
-var http = require("http"),
-fs = require("fs"), 
-qs = require("querystring"); 
+
+let handlebars =  require("express-handlebars");
+app.engine(".html", handlebars({extname: '.html'}));
+app.set("view engine", ".html");
 
 
-function serveStatic(res, path, contentType, responseCode){
-    if(!responseCode) responseCode = 200;
-    fs.readFile(__dirname + path, function(err,data) {
-        if(err){
-            res.writeHead(500, {'Content-Type' : 'text/plain'});
-            res.end('500 - Internal Error');
-        }else {
-            res.writeHead(responseCode, {'Content-Type': contentType});
-            res.end(data);
-        }
-    });
-}
-
-http.createServer((req,res) => {
-    
-  let url = req.url.split("?");
-  let query = qs.parse(url[1]);
-  let path = url[0].toLowerCase();
-
-    //var path = req.url.replace(/\/?(?:\?.*)?$/, '').toLowerCase();
-    
-        switch(path) {
-            case '/': 
-              serveStatic(res, '/public/home.html', 'text/html');
-              break;
+            app.get('/', (req, res) => {
+               res.type('text/html');
+               res.sendFile(__dirname + '/public/home.html'); 
+            });
               
-            case '/about':
-              res.writeHead(200, {'Content-Type': 'text/plain'});
-              res.end('about');
-              break;
+            app.get('/about', (req, res) => {
+             res.type('text/plain');
+             res.send('About page');
+            });
+            
+            app.post('/detail', function(req,res){
+              console.log(req.body);
+                var header = 'Searching for: ' + req.body.name + '<br>';
+                var found = radiohead.getOneAlbum(req.body.name);
+                res.render("details", {name: req.body.name, result: found});
+            });
+            
+            app.get('/delete', function(req,res){
+              let result = radiohead.deleteAlbum(req.query.name);
+              res.render('delete', {title: req.query.name, result: result});
+            });
               
-            case '/detail':
-              let singleAlbum = radiohead.getOneAlbum(query.name);
-              res.writeHead(200, {'Content-Type': 'text/plain'});
-              let results = (singleAlbum) ? JSON.stringify(singleAlbum) : "Not records found";
-              res.end('Results for ' + query.name + "\n" + results);
-              break;
-              
-            case '/delete':
-              res.writeHead(200, {'Content-Type': 'text/plain'});
-              let result = radiohead.deleteAlbum(query.name);
-              var word = (!result.deleted) ? " not " : ""; 
-              res.end(query.name + word + " removed. " + result.total + " total albums");
-              break;
-              
-            default:
-              res.writeHead(404, {'Content-Type': 'text/plain'});
-              res.end('404:Page not found.');
-               }
-    
-}).listen(process.env.PORT || 3000);
+            app.use( (req,res) => {
+             res.type('text/plain'); 
+             res.status(404);
+             res.send('404 - Not found');
+            });
+            
+            app.get('/get', (req,res) => {
+             let result = radiohead.getOneAlbum(req.query.name);
+             res.render('details', {title: req.query.name, result: result });
+            });
+            
+            app.listen(app.get('port'), function() {
+              console.log('Express started');    
+            });
 
-console.log('Server started on localhost:3000; press Ctrl-C to terminate...');
+
