@@ -38,19 +38,19 @@
     <navigation>
        <ul>
 		<li><img src="/img/logo.png" alt="logo"></li>
-        <li><a href="/public/home.html">HOME</a></li>
-		<li><a href="/public/about.html">ABOUT</a></li>	
+        <li><a href="/">HOME</a></li>
+		<li><a href="/about.html">ABOUT</a></li>	
 	   </ul>
     </navigation> 
 </header>
 <body>
     
 {{#if result.deleted}}
-    <h2>"{{name}}" deleted</h2>
-    <p>Remaining total: {{result.total}}</p>
+    <h2>{{name}} deleted</h2>
+    <p>Remaining total: {{ result.total }}</p>
 
 {{else}}
-    <h2>"{{name}}" Not Found</h2>
+    <h2>{{name}} Not Found</h2>
 
 {{/if}}
     

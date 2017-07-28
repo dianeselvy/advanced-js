@@ -38,8 +38,8 @@
     <navigation>
        <ul>
 		<li><img src="/img/logo.png" alt="logo"></li>
-        <li><a href="/public/home.html">HOME</a></li>
-		<li><a href="/public/about.html">ABOUT</a></li>	
+        <li><a href="/">HOME</a></li>
+		<li><a href="/about.html">ABOUT</a></li>
 	   </ul>
     </navigation> 
 </header>
@@ -50,9 +50,9 @@
         <li>Album Name: {{ result.name }}</li>
         <li>Number of Songs: {{ result.songs }}</li>
         <li>Release Year: {{ result.year }}</li>
-    <br>
+
+    <a href="/delete?name={{result.name}}">Delete</a>
     
-    <a href="/delete?title={{result.name}}">Delete</a>
 {{else}}
     <h2>{{name}} Not Found</h2>
 {{/if}}
