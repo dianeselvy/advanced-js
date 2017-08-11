@@ -1,0 +1,55 @@
+<html>
+<head>
+    <title>Node.js - Home</title> 
+</head>
+<header>
+<style type="text/css">
+    
+    navigation {
+        width:1200px;
+        height:65px;
+    }
+
+    navigation ul {
+        background:#dae2ef;
+        font-family: 'Francois One', sans-serif;
+        text-align:left;
+        font-size:18px;
+        padding-top:15px;
+        padding-bottom:15px;
+    }
+
+    navigation ul li {
+        list-style-type:none;
+        padding:55px; 
+        display:inline;
+        size:20px;
+    }
+
+    navigation ul li a {
+        text-decoration:none;
+        color:#000000;
+    }
+    navigation ul li img {
+        width:50px;
+    }
+    
+</style>
+    <navigation>
+       <ul>
+		<li><img src="/img/logo.png" alt="logo"></li>
+        <li><a href="/">HOME</a></li>
+		<li><a href="/about.html">ABOUT</a></li>	
+	   </ul>
+    </navigation> 
+</header>
+<body>
+<p>Home.html</p>
+
+<form action="/detail" method="POST">
+    <input type="text" name="name" placeholder="Search albums...">
+    <button>Search</button>
+</form>
+
+</body>
+</html>

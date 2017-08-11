@@ -1,8 +1,9 @@
 {
   "dependencies": {
+    "body-parser": "1.17.2",
     "express": "^4.15.3",
     "express-handlebars": "^2.0.1",
-    "body-parser": "1.17.2"
+    "mongoose": "^3.8.40"
   },
   "name": "advanced-js",
   "version": "1.0.0",
