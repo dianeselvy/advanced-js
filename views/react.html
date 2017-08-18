@@ -2,7 +2,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-    <title>React App Starter Page</title>
+    <title>Browse Radiohead Albums</title></title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.0/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
@@ -45,36 +45,86 @@
 // UI elements
  
  const Title = ({name}) => {
- // simple component w/ single property
- return <div><h2>{name}</h2></div>;
+     // simple component w/ single property
+     return (
+         <div><h2>{name}</h2></div>
+         );
  }
  
  const ItemList = ({items, filter, show}) => {
- // generate array of item nodes
- const itemNodes = items.map((item) => {
- return <li id={item._id} key={item._id} onClick={show}>{item.name}</li>
- });
- return <ul>{itemNodes}</ul>;
+     // generate array of item nodes
+     const itemNodes = items.map((item) => {
+     return <li id={item._id} key={item._id} onClick={show}>{item.name}</li>
+     });
+     return <ul>{itemNodes}</ul>;
  }
+ 
+ 
+ 
+ const SearchForm = (props) => {
+     return (
+         <div>
+         <form>
+         <input type="text" placeholder="Search..." value={props.filter} onChange={props.change} />
+            <input type="submit" value="Submit" />
+         </form>
+         </div>
+         );
+ }
+ 
+ const ItemDetails = (props) => {
+        return (
+          <span id="item-details">
+            <h3>Details:</h3>
+            <form onChange={props.change}>
+              <input type="text" name="name" placeholder="album name" value={props.item.name || ""} /><p/>
+              <input type="text" name="songs" placeholder="number of songs" value={props.item.songs || ""} /><p/>
+              <input type="date" name="year" placeholder="release year" value={getISOstring(props.item.year)} />
+              <p/>
+            </form>
+            <button onClick={props.save}>Save</button>  <button onClick={props.reset}>Reset</button> <button onClick={props.delete}>Delete</button>
+          </span>
+        );
+    }
  
  class MyApp extends React.Component {
- constructor(props){
- super(props);
-
-// data from server 
- this.state = {
- items: {{{albums}}}
- };
- }
- 
- render() {
- return (
- <div>
- <Title title="My Stuff" />
- <ItemList items={this.state.items}/>
- </div>
- );
- }
+     constructor(props){
+     super(props);
+    
+    // data from server 
+     this.state = {
+     items: {{{albums}}},
+     filter: "",
+     curItem: {}
+     };
+     }
+     
+    onSearchChange(event) {
+        // set search term. react will handle component updates 
+        this.setState({filter: event.target.value.toLowerCase() });
+      }
+      
+    showDetails(event){
+        let editItem = this.state.items.find((item) => {
+          return item._id == event.target.id;
+        });
+        this.setState({curItem: editItem});
+      }
+      
+     render() {
+     return (
+     <div>
+     <Title title="All Albums" />
+     <SearchForm filter={this.state.filter} change={this.onSearchChange} />
+     <ItemList 
+        items={this.state.items}
+        filter={this.state.filter}
+        show={this.showDetails.bind(this)}
+        />
+     
+     </div>
+     );
+     }
  
  }
 
