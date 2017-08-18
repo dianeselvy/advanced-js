@@ -26,7 +26,7 @@ var albumSchema = require('./models/albumSchema.js');
                Radiohead.find((err, result) => {
                     console.log(result);
             if (err) return next(err);
-                        res.render("home", {'albums': {albums: JSON.stringify(result)}});
+                        res.render("react", {albums: JSON.stringify(result)});
                     
                 });
             });
